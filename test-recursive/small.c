@@ -9,11 +9,11 @@ int g() {
     return c;
 }
 
-int main() {
-    int prev_alnum = 0;
-    int had_space = 0;
-    int need_newline = 0;
+int prev_alnum;
+int had_space;
+int need_newline;
 
+int main() {
     for (;;) {
 	int c = g();
 
