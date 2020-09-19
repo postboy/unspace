@@ -4,6 +4,17 @@
 
 #define p putchar
 
+#define l(x) \
+	else if (c == x) { \
+	    p(c); \
+	    do { \
+		c = g(); \
+		p(c); \
+		if (c == '\\') \
+		    p(g()); \
+	    } while (c != x); \
+	}
+
 int g() {
     int c = getchar();
     if (c < 0)
@@ -53,24 +64,8 @@ int main() {
 		p(c);
 	    }
 	}
-	else if (c == '\'') {
-	    p(c);
-	    do {
-		c = g();
-		p(c);
-		if (c == '\\')
-		    p(g());
-	    } while (c != '\'');
-	}
-	else if (c == '"') {
-	    p(c);
-	    do {
-		c = g();
-		p(c);
-		if (c == '\\')
-		    p(g());
-	    } while (c != '"');
-	}
+	l('\'')
+	l('"')
 	else if (c == '/') {
 	    c = g();
 	    if (c == '/')
