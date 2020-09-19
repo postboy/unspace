@@ -9,9 +9,7 @@ int g() {
     return c;
 }
 
-int prev_alnum;
-int had_space;
-int need_newline;
+int prev_alnum, had_space, need_newline;
 
 int main() {
     for (;;) {
