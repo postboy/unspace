@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-int safe_getchar(void) {
+int safe_getchar() {
     int c = getchar();
     if (c == EOF)
 	exit(0);
     return c;
 }
 
-int main(void) {
+int main() {
     int prev_alnum = 0;
     int had_space = 0;
     int need_newline = 0;
