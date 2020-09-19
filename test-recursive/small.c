@@ -4,7 +4,7 @@
 
 int g() {
     int c = getchar();
-    if (c == EOF)
+    if (c < 0)
 	exit(0);
     return c;
 }
