@@ -1,0 +1,10 @@
+# exclude temporary files
+
+unspace
+
+test-simple/minified.c
+test-simple/minified
+
+test-recursive/reference.c
+test-recursive/small
+test-recursive/tiny
