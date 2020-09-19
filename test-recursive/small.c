@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#define p putchar
+
 int g() {
     int c = getchar();
     if (c < 0)
@@ -16,7 +18,7 @@ int main() {
 	int c = g();
 
         if (c == '\n' && need_newline) {
-	    putchar(c);
+	    p(c);
 	    need_newline = 0;
 	    prev_alnum = 0;
 	    continue;
@@ -32,10 +34,10 @@ int main() {
 	if (isalnum(c) || c == '_') {
 	    prev_alnum = 1;
 	    if (had_space)
-		putchar(' ');
+		p(' ');
 	    had_space = 0;
 	    do {
-		putchar(c);
+		p(c);
 		c = g();
 	    } while (isalnum(c) || c == '_');
 	    ungetc(c, stdin);
@@ -47,26 +49,26 @@ int main() {
 	if (c == '\\') {
 	    c = g();
 	    if (c != '\n') {
-		putchar('\\');
-		putchar(c);
+		p('\\');
+		p(c);
 	    }
 	}
 	else if (c == '\'') {
-	    putchar(c);
+	    p(c);
 	    do {
 		c = g();
-		putchar(c);
+		p(c);
 		if (c == '\\')
-		    putchar(g());
+		    p(g());
 	    } while (c != '\'');
 	}
 	else if (c == '"') {
-	    putchar(c);
+	    p(c);
 	    do {
 		c = g();
-		putchar(c);
+		p(c);
 		if (c == '\\')
-		    putchar(g());
+		    p(g());
 	    } while (c != '"');
 	}
 	else if (c == '/') {
@@ -80,10 +82,10 @@ int main() {
 	}
 	else if (c == '#') {
 	    need_newline = 1;
-	    putchar(c);
+	    p(c);
 	}
 	else {
-	    putchar(c);
+	    p(c);
 	}
     }
 }
