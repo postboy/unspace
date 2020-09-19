@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-char safe_getchar(void) {
+int safe_getchar(void) {
     int c = getchar();
     if (c == EOF)
 	exit(0);
@@ -16,7 +16,7 @@ int main(void) {
     bool need_newline = false;
 
     for (;;) {
-	char c = safe_getchar();
+	int c = safe_getchar();
 
         if (c == '\n' && need_newline) {
 	    putchar(c);
