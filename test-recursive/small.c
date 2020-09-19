@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <stdbool.h>
 
 int safe_getchar(void) {
     int c = getchar();
@@ -11,32 +10,32 @@ int safe_getchar(void) {
 }
 
 int main(void) {
-    bool prev_alnum = false;
-    bool had_space = false;
-    bool need_newline = false;
+    int prev_alnum = 0;
+    int had_space = 0;
+    int need_newline = 0;
 
     for (;;) {
 	int c = safe_getchar();
 
         if (c == '\n' && need_newline) {
 	    putchar(c);
-	    need_newline = false;
-	    prev_alnum = false;
+	    need_newline = 0;
+	    prev_alnum = 0;
 	    continue;
 	}
 
 	if (isspace(c)) {
 	    if (prev_alnum)
-		had_space = true;
-	    prev_alnum = false;
+		had_space = 1;
+	    prev_alnum = 0;
 	    continue;
 	}
 
 	if (isalnum(c) || c == '_') {
-	    prev_alnum = true;
+	    prev_alnum = 1;
 	    if (had_space)
 		putchar(' ');
-	    had_space = false;
+	    had_space = 0;
 	    do {
 		putchar(c);
 		c = safe_getchar();
@@ -45,8 +44,8 @@ int main(void) {
 	    continue;
 	}
 
-	prev_alnum = false;
-	had_space = false;
+	prev_alnum = 0;
+	had_space = 0;
 	if (c == '\\') {
 	    c = safe_getchar();
 	    if (c != '\n') {
@@ -82,7 +81,7 @@ int main(void) {
 		ungetc(c, stdin);
 	}
 	else if (c == '#') {
-	    need_newline = true;
+	    need_newline = 1;
 	    putchar(c);
 	}
 	else {
