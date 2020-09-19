@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-int safe_getchar() {
+int g() {
     int c = getchar();
     if (c == EOF)
 	exit(0);
@@ -15,7 +15,7 @@ int main() {
     int need_newline = 0;
 
     for (;;) {
-	int c = safe_getchar();
+	int c = g();
 
         if (c == '\n' && need_newline) {
 	    putchar(c);
@@ -38,7 +38,7 @@ int main() {
 	    had_space = 0;
 	    do {
 		putchar(c);
-		c = safe_getchar();
+		c = g();
 	    } while (isalnum(c) || c == '_');
 	    ungetc(c, stdin);
 	    continue;
@@ -47,7 +47,7 @@ int main() {
 	prev_alnum = 0;
 	had_space = 0;
 	if (c == '\\') {
-	    c = safe_getchar();
+	    c = g();
 	    if (c != '\n') {
 		putchar('\\');
 		putchar(c);
@@ -56,27 +56,27 @@ int main() {
 	else if (c == '\'') {
 	    putchar(c);
 	    do {
-		c = safe_getchar();
+		c = g();
 		putchar(c);
 		if (c == '\\')
-		    putchar(safe_getchar());
+		    putchar(g());
 	    } while (c != '\'');
 	}
 	else if (c == '"') {
 	    putchar(c);
 	    do {
-		c = safe_getchar();
+		c = g();
 		putchar(c);
 		if (c == '\\')
-		    putchar(safe_getchar());
+		    putchar(g());
 	    } while (c != '"');
 	}
 	else if (c == '/') {
-	    c = safe_getchar();
+	    c = g();
 	    if (c == '/')
-		while (safe_getchar() != '\n');
+		while (g() != '\n');
 	    else if (c == '*')
-		while (safe_getchar() != '*' || safe_getchar() != '/');
+		while (g() != '*' || g() != '/');
 	    else
 		ungetc(c, stdin);
 	}
