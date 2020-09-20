@@ -46,12 +46,6 @@ int main() {
 	    if (had_space)
 		p(' ');
 	    had_space = 0;
-	    do {
-		p(c);
-		c = g();
-	    } while i(c);
-	    ungetc(c, stdin);
-	    continue;
 	}
 
 	if (c == '\\') {
