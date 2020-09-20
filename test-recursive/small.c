@@ -4,6 +4,8 @@
 
 #define p(c) last_printed = putchar(c)
 
+#define i(c) (isalnum(c) || c == '_')
+
 #define l(x) \
 	else if (c == x) { \
 	    p(c); \
@@ -22,7 +24,7 @@ int g() {
     return c;
 }
 
-int prev_alnum, had_space, need_newline, last_printed = '\n';
+int had_space, need_newline, last_printed = '\n';
 
 int main() {
     for (;;) {
@@ -31,26 +33,23 @@ int main() {
         if (c == '\n' && need_newline) {
 	    p(c);
 	    need_newline = 0;
-	    prev_alnum = 0;
 	    // fallthrough
 	}
 
 	if (isspace(c)) {
-	    if (prev_alnum)
+	    if i(last_printed)
 		had_space = 1;
-	    prev_alnum = 0;
 	    continue;
 	}
 
-	if (isalnum(c) || c == '_') {
-	    prev_alnum = 1;
+	if i(c) {
 	    if (had_space)
 		p(' ');
 	    had_space = 0;
 	    do {
 		p(c);
 		c = g();
-	    } while (isalnum(c) || c == '_');
+	    } while i(c);
 	    ungetc(c, stdin);
 	    continue;
 	}
@@ -64,7 +63,6 @@ int main() {
 	    continue;
 	}
 
-	prev_alnum = 0;
 	had_space = 0;
 	if (c == '#') {
 	    need_newline = 1;
