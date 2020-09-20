@@ -10,16 +10,19 @@ char safe_getchar(void) {
     return c;
 }
 
+#define smart_putchar(c) last_printed = putchar(c)
+
 int main(void) {
     bool prev_alnum = false;
     bool had_space = false;
     bool need_newline = false;
+    int last_printed = '\n';
 
     for (;;) {
 	char c = safe_getchar();
 
         if (c == '\n' && need_newline) {
-	    putchar(c);
+	    smart_putchar(c);
 	    need_newline = false;
 	    prev_alnum = false;
 	    continue;
@@ -35,10 +38,10 @@ int main(void) {
 	if (isalnum(c) || c == '_') {
 	    prev_alnum = true;
 	    if (had_space)
-		putchar(' ');
+		smart_putchar(' ');
 	    had_space = false;
 	    do {
-		putchar(c);
+		smart_putchar(c);
 		c = safe_getchar();
 	    } while (isalnum(c) || c == '_');
 	    ungetc(c, stdin);
@@ -48,8 +51,8 @@ int main(void) {
 	if (c == '\\') {
 	    c = safe_getchar();
 	    if (c != '\n') {
-		putchar('\\');
-		putchar(c);
+		smart_putchar('\\');
+		smart_putchar(c);
 	    }
 	    continue;
 	}
@@ -58,24 +61,26 @@ int main(void) {
 	had_space = false;
 	if (c == '#') {
 	    need_newline = true;
-	    putchar(c);
+	    if (last_printed != '\n')
+		smart_putchar('\n');
+	    smart_putchar(c);
 	}
 	else if (c == '\'') {
-	    putchar(c);
+	    smart_putchar(c);
 	    do {
 		c = safe_getchar();
-		putchar(c);
+		smart_putchar(c);
 		if (c == '\\')
-		    putchar(safe_getchar());
+		    smart_putchar(safe_getchar());
 	    } while (c != '\'');
 	}
 	else if (c == '"') {
-	    putchar(c);
+	    smart_putchar(c);
 	    do {
 		c = safe_getchar();
-		putchar(c);
+		smart_putchar(c);
 		if (c == '\\')
-		    putchar(safe_getchar());
+		    smart_putchar(safe_getchar());
 	    } while (c != '"');
 	}
 	else if (c == '/') {
@@ -88,7 +93,7 @@ int main(void) {
 		ungetc(c, stdin);
 	}
 	else {
-	    putchar(c);
+	    smart_putchar(c);
 	}
     }
 }

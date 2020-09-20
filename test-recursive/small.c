@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define p putchar
+#define p(c) last_printed = putchar(c)
 
 #define l(x) \
 	else if (c == x) { \
@@ -22,7 +22,7 @@ int g() {
     return c;
 }
 
-int prev_alnum, had_space, need_newline;
+int prev_alnum, had_space, need_newline, last_printed = '\n';
 
 int main() {
     for (;;) {
@@ -68,6 +68,8 @@ int main() {
 	had_space = 0;
 	if (c == '#') {
 	    need_newline = 1;
+	    if (last_printed != '\n')
+		p('\n');
 	    p(c);
 	}
 	l('\'')
