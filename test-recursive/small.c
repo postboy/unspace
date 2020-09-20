@@ -31,6 +31,7 @@ int main() {
         if (c == '\n' && need_newline) {
 	    p(c);
 	    need_newline = 0;
+	    prev_alnum = 0;
 	    // fallthrough
 	}
 
