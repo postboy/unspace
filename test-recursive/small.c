@@ -55,14 +55,20 @@ int main() {
 	    continue;
 	}
 
-	prev_alnum = 0;
-	had_space = 0;
 	if (c == '\\') {
 	    c = g();
 	    if (c != '\n') {
 		p('\\');
 		p(c);
 	    }
+	    continue;
+	}
+
+	prev_alnum = 0;
+	had_space = 0;
+	if (c == '#') {
+	    need_newline = 1;
+	    p(c);
 	}
 	l('\'')
 	l('"')
@@ -74,10 +80,6 @@ int main() {
 		while (g() != '*' || g() != '/');
 	    else
 		ungetc(c, stdin);
-	}
-	else if (c == '#') {
-	    need_newline = 1;
-	    p(c);
 	}
 	else {
 	    p(c);

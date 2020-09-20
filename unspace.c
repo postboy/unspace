@@ -45,14 +45,20 @@ int main(void) {
 	    continue;
 	}
 
-	prev_alnum = false;
-	had_space = false;
 	if (c == '\\') {
 	    c = safe_getchar();
 	    if (c != '\n') {
 		putchar('\\');
 		putchar(c);
 	    }
+	    continue;
+	}
+
+	prev_alnum = false;
+	had_space = false;
+	if (c == '#') {
+	    need_newline = true;
+	    putchar(c);
 	}
 	else if (c == '\'') {
 	    putchar(c);
@@ -80,10 +86,6 @@ int main(void) {
 		while (safe_getchar() != '*' || safe_getchar() != '/');
 	    else
 		ungetc(c, stdin);
-	}
-	else if (c == '#') {
-	    need_newline = true;
-	    putchar(c);
 	}
 	else {
 	    putchar(c);

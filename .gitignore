@@ -8,3 +8,5 @@ test-simple/minified
 test-recursive/reference.c
 test-recursive/small
 test-recursive/tiny
+
+test-ut/minified.c
