@@ -81,8 +81,7 @@ int main() {
 	    else
 		ungetc(c, stdin);
 	}
-	else {
+	else
 	    p(c);
-	}
     }
 }
