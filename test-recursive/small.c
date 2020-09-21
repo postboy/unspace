@@ -30,11 +30,9 @@ int main() {
     for (;;) {
 	int c = g();
 
-        if (c == '\n' && need_newline) {
-	    p(c);
-	    need_newline = 0;
+        if (c == '\n' && need_newline)
+	    p(c), need_newline = 0;
 	    // fallthrough
-	}
 
 	if (isspace(c)) {
 	    if i(last_printed)
@@ -42,18 +40,14 @@ int main() {
 	    continue;
 	}
 
-	if i(c) {
-	    if (had_space)
-		p(' ');
-	    had_space = 0;
-	}
+	if i(c)
+	     if (had_space)
+		 p(' '), had_space = 0;
 
 	if (c == '\\') {
 	    c = g();
-	    if (c != '\n') {
-		p('\\');
-		p(c);
-	    }
+	    if (c != '\n')
+		p('\\'), p(c);
 	    continue;
 	}
 
