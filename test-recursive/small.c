@@ -28,8 +28,8 @@ int g() {
     return c;
 }
 
-// character
-int c, had_space, need_newline, last_printed = '\n';
+// character, had_space
+int c, s, need_newline, last_printed = '\n';
 
 int main() {
 b: // begin
@@ -42,13 +42,13 @@ a: // analysis
 
     if (isspace(c)) {
 	if t(last_printed)
-	    had_space = 1;
+	    s = 1;
 	goto b;
     }
 
     if t(c)
-	if (had_space)
-	    p(' '), had_space = 0;
+	if (s)
+	    p(' '), s = 0;
 
     if (c == '\\') {
 	c = g();
@@ -57,7 +57,7 @@ a: // analysis
 	goto b;
     }
 
-    had_space = 0;
+    s = 0;
     if (c == '#') {
 	need_newline = 1;
 	if (last_printed != '\n')
@@ -65,7 +65,7 @@ a: // analysis
 	p(c);
     }
     l('\'')
-	l('"')
+    l('"')
     else if (c == '/') {
 	c = g();
 	if (c == '/')
