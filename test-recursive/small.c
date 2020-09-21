@@ -28,16 +28,16 @@ int g() {
     return c;
 }
 
-// character, had_space
-int c, s, need_newline, last_printed = '\n';
+// character, had_space, need_newline
+int c, s, n, last_printed = '\n';
 
 int main() {
 b: // begin
     c = g();
 
 a: // analysis
-    if (c == '\n' && need_newline)
-	p(c), need_newline = 0;
+    if (c == '\n' && n)
+	p(c), n = 0;
     // fallthrough
 
     if (isspace(c)) {
@@ -59,7 +59,7 @@ a: // analysis
 
     s = 0;
     if (c == '#') {
-	need_newline = 1;
+	n = 1;
 	if (last_printed != '\n')
 	    p('\n');
 	p(c);
