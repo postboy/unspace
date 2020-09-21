@@ -3,7 +3,7 @@
 #include <ctype.h>
 
 // write
-#define w(c) last_printed = putchar(c)
+#define w(c) p = putchar(c)
 
 // token
 #define t(c) (isalnum(c) || c == '_')
@@ -28,8 +28,8 @@ int g() {
     return c;
 }
 
-// character, had_space, need_newline
-int c, s, n, last_printed = '\n';
+// character, had_space, need_newline, last_printed
+int c, s, n, p = '\n';
 
 int main() {
 b: // begin
@@ -41,7 +41,7 @@ a: // analysis
     // fallthrough
 
     if (isspace(c)) {
-	if t(last_printed)
+	if t(p)
 	    s = 1;
 	goto b;
     }
@@ -60,7 +60,7 @@ a: // analysis
     s = 0;
     if (c == '#') {
 	n = 1;
-	if (last_printed != '\n')
+	if (p != '\n')
 	    w('\n');
 	w(c);
     }
