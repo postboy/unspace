@@ -4,7 +4,7 @@
 
 #define p(c) last_printed = putchar(c)
 
-#define i(c) (isalnum(c) || c == '_')
+#define t(c) (isalnum(c) || c == '_')
 
 #define l(x) \
 	else if (c == x) { \
@@ -35,12 +35,12 @@ int main() {
 	    // fallthrough
 
 	if (isspace(c)) {
-	    if i(last_printed)
+	    if t(last_printed)
 		had_space = 1;
 	    continue;
 	}
 
-	if i(c)
+	if t(c)
 	     if (had_space)
 		 p(' '), had_space = 0;
 
