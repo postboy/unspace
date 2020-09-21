@@ -30,6 +30,7 @@ int main() {
     for (;;) {
 	int c = g();
 
+a:
         if (c == '\n' && need_newline)
 	    p(c), need_newline = 0;
 	    // fallthrough
@@ -67,7 +68,7 @@ int main() {
 	    else if (c == '*')
 		while (g() != '*' || g() != '/');
 	    else
-		ungetc(c, stdin);
+		goto a;
 	}
 	else
 	    p(c);
