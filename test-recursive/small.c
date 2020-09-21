@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+// print
 #define p(c) last_printed = putchar(c)
 
+// token
 #define t(c) (isalnum(c) || c == '_')
 
+// literal
 #define l(x) \
 	else if (c == x) { \
 	    p(c); \
@@ -17,6 +20,7 @@
 	    } while (c != x); \
 	}
 
+// get
 int g() {
     int c = getchar();
     if (c < 0)
@@ -24,13 +28,14 @@ int g() {
     return c;
 }
 
-int had_space, need_newline, last_printed = '\n';
+// character
+int c, had_space, need_newline, last_printed = '\n';
 
 int main() {
-    for (;;) {
-	int c = g();
+b: // begin
+	c = g();
 
-a:
+a: // analysis
         if (c == '\n' && need_newline)
 	    p(c), need_newline = 0;
 	    // fallthrough
@@ -38,7 +43,7 @@ a:
 	if (isspace(c)) {
 	    if t(last_printed)
 		had_space = 1;
-	    continue;
+	    goto b;
 	}
 
 	if t(c)
@@ -49,7 +54,7 @@ a:
 	    c = g();
 	    if (c != '\n')
 		p('\\'), p(c);
-	    continue;
+	    goto b;
 	}
 
 	had_space = 0;
@@ -72,5 +77,5 @@ a:
 	}
 	else
 	    p(c);
-    }
+	goto b;
 }
