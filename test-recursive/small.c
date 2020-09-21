@@ -23,9 +23,7 @@
 // get
 int g() {
     int c = getchar();
-    if (c < 0)
-	exit(0);
-    return c;
+    return c < 0 ? exit(0), c: c;
 }
 
 // character, had_space, need_newline, last_printed
