@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-// print
-#define p(c) last_printed = putchar(c)
+// write
+#define w(c) last_printed = putchar(c)
 
 // token
 #define t(c) (isalnum(c) || c == '_')
@@ -11,12 +11,12 @@
 // literal
 #define l(x)					\
     else if (c == x) {				\
-	p(c);					\
+	w(c);					\
 	do {					\
 	    c = g();				\
-	    p(c);				\
+	    w(c);				\
 	    if (c == '\\')			\
-		p(g());				\
+		w(g());				\
 	} while (c != x);			\
     }
 
@@ -37,7 +37,7 @@ b: // begin
 
 a: // analysis
     if (c == '\n' && n)
-	p(c), n = 0;
+	w(c), n = 0;
     // fallthrough
 
     if (isspace(c)) {
@@ -48,12 +48,12 @@ a: // analysis
 
     if t(c)
 	if (s)
-	    p(' '), s = 0;
+	    w(' '), s = 0;
 
     if (c == '\\') {
 	c = g();
 	if (c != '\n')
-	    p('\\'), p(c);
+	    w('\\'), w(c);
 	goto b;
     }
 
@@ -61,8 +61,8 @@ a: // analysis
     if (c == '#') {
 	n = 1;
 	if (last_printed != '\n')
-	    p('\n');
-	p(c);
+	    w('\n');
+	w(c);
     }
     l('\'')
     l('"')
@@ -76,6 +76,6 @@ a: // analysis
 	    goto a;
     }
     else
-	p(c);
+	w(c);
     goto b;
 }
