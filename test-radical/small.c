@@ -24,7 +24,6 @@ int main() {
 b:
     c = g();
 
-a:
     if (c == '\n' && n)
 	w(c), n = 0;
 
