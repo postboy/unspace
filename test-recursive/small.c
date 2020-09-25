@@ -3,7 +3,7 @@
 #include <ctype.h>
 
 // write
-#define w(c) p = putchar(c)
+#define w p = putchar
 
 // token
 #define t(c) (isalnum(c) || c == '_')
