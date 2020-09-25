@@ -1,6 +1,3 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<ctype.h>
 #define i if
 #define w p=putchar
 #define t(c)(isalnum(c)||c=='_')

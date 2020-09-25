@@ -1,7 +1,7 @@
 #!/bin/sh
 
 dir='./test-radical'
-CFLAGS='-Wall -Wpedantic'
+CFLAGS='-w'
 
 ./unspace <${dir}/small.c >${dir}/reference.c || exit 1
 
