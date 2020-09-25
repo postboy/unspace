@@ -9,4 +9,8 @@ test-recursive/reference.c
 test-recursive/small
 test-recursive/tiny
 
+test-radical/reference.c
+test-radical/small
+test-radical/tiny
+
 test-ut/minified.c
