@@ -1,7 +1,5 @@
 #define w p = putchar
 
-#define t(c) (isalnum(c) || c == '_')
-
 #define l(x)					\
     else if (c == x) {				\
 	w(c);					\
@@ -28,14 +26,13 @@ b:
 	w(c), n = 0;
 
     if (isspace(c)) {
-	if t(p)
+	if (isalnum(p) || p == '_')
 	    s = 1;
 	goto b;
     }
 
-    if t(c)
-	if (s)
-	    w(' '), s = 0;
+    if ((isalnum(c) || c == '_') && s)
+	w(' '), s = 0;
 
     if (c == '\\') {
 	c = g();

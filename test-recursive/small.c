@@ -7,9 +7,6 @@
 // write
 #define w p = putchar
 
-// token
-#define t(c) (isalnum(c) || c == '_')
-
 // literal
 #define l(x)					\
     else i (c == x) {				\
@@ -41,14 +38,13 @@ a: // analysis
     // fallthrough
 
     i (isspace(c)) {
-	i t(p)
+	i (isalnum(p) || p == '_')
 	    s = 1;
 	goto b;
     }
 
-    i t(c)
-	i (s)
-	    w(' '), s = 0;
+    i ((isalnum(c) || c == '_') && s)
+        w(' '), s = 0;
 
     i (c == '\\') {
 	c = g();
