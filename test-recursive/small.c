@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#define i if
+
 // write
 #define w p = putchar
 
@@ -10,12 +12,12 @@
 
 // literal
 #define l(x)					\
-    else if (c == x) {				\
+    else i (c == x) {				\
 	w(c);					\
 	do {					\
 	    c = g();				\
 	    w(c);				\
-	    if (c == '\\')			\
+	    i (c == '\\')			\
 		w(g());				\
 	} while (c != x);			\
     }
@@ -34,41 +36,41 @@ b: // begin
     c = g();
 
 a: // analysis
-    if (c == '\n' && n)
+    i (c == '\n' && n)
 	w(c), n = 0;
     // fallthrough
 
-    if (isspace(c)) {
-	if t(p)
+    i (isspace(c)) {
+	i t(p)
 	    s = 1;
 	goto b;
     }
 
-    if t(c)
-	if (s)
+    i t(c)
+	i (s)
 	    w(' '), s = 0;
 
-    if (c == '\\') {
+    i (c == '\\') {
 	c = g();
-	if (c != '\n')
+	i (c != '\n')
 	    w('\\'), w(c);
 	goto b;
     }
 
     s = 0;
-    if (c == '#') {
+    i (c == '#') {
 	n = 1;
-	if (p != '\n')
+	i (p != '\n')
 	    w('\n');
 	w(c);
     }
     l('\'')
     l('"')
-    else if (c == '/') {
+    else i (c == '/') {
 	c = g();
-	if (c == '/')
+	i (c == '/')
 	    while (g() != '\n');
-	else if (c == '*')
+	else i (c == '*')
 	    while (g() != '*' || g() != '/');
 	else
 	    goto a;
