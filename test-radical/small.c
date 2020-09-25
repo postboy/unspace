@@ -1,16 +1,14 @@
-#define i if
-
 #define w p = putchar
 
 #define t(c) (isalnum(c) || c == '_')
 
 #define l(x)					\
-    else i (c == x) {				\
+    else if (c == x) {				\
 	w(c);					\
 	do {					\
 	    c = g();				\
 	    w(c);				\
-	    i (c == '\\')			\
+	    if (c == '\\')			\
 		w(g());				\
 	} while (c != x);			\
     }
@@ -27,30 +25,30 @@ b:
     c = g();
 
 a:
-    i (c == '\n' && n)
+    if (c == '\n' && n)
 	w(c), n = 0;
 
-    i (isspace(c)) {
-	i t(p)
+    if (isspace(c)) {
+	if t(p)
 	    s = 1;
 	goto b;
     }
 
-    i t(c)
-	i (s)
+    if t(c)
+	if (s)
 	    w(' '), s = 0;
 
-    i (c == '\\') {
+    if (c == '\\') {
 	c = g();
-	i (c != '\n')
+	if (c != '\n')
 	    w('\\'), w(c);
 	goto b;
     }
 
     s = 0;
-    i (c == '#') {
+    if (c == '#') {
 	n = 1;
-	i (p != '\n')
+	if (p != '\n')
 	    w('\n');
 	w(c);
     }
